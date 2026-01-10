@@ -3,11 +3,14 @@ import router from "./routes/memoRoute.js";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({
+    quiet: true,
+});
 
 const app = express();
 const PORT = process.env.PORT;
 
+app.use(express.json());
 app.use('/api/memories', router);
 
 connectDB().then(() => {
@@ -15,4 +18,3 @@ connectDB().then(() => {
         console.log(`Server waiting at http://localhost:${PORT}`);
     })
 });
-// mongodb+srv://gowritharun461_db_user:VLtD8NLi2Na7mPeg@cluster0.xphu4ut.mongodb.net/?appName=Cluster0
