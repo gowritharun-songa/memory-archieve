@@ -9,7 +9,7 @@ const memorySchema = mongoose.Schema({
     content: {
         type: String,
         required: true,
-        maxlength: 200,
+        maxlength: 500,
         trim: true
     },
     creator: {
