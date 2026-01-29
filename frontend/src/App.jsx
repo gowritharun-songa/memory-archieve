@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Detail from "./pages/Detail";
-import Edit from "./pages/Edit";
+import Edit from "./pages/Edit.jsx";
+
 
 function App() {
   return (
