@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Detail from "./pages/Detail";
+import Edit from "./pages/Edit";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
         <Route path="/memory/:id" element={<Detail />} />
+        <Route path="/memory-edit/:id" element={<Edit />} />
 
         <Route
           path="*"
