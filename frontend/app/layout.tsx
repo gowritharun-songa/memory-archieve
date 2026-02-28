@@ -3,8 +3,14 @@ import "./globals.css";
 import { Poppins, Roboto, Dancing_Script } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Memory Archive | Your Digital Scrapbook",
-  description: "A simple and clean memory archive to store your precious moments, photos, and stories.",
+  title: "Memory Archive",
+  description:
+    "A simple and clean memory archive to store your precious moments, photos, and stories.",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: ["/favicon.svg"],
+    apple: ["/favicon.svg"],
+  },
 };
 
 const poppins = Poppins({
@@ -23,7 +29,8 @@ const dancingScript = Dancing_Script({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-cursive",
-})
+});
+
 
 export default function RootLayout({
   children,
