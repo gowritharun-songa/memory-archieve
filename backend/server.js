@@ -23,7 +23,16 @@ const PORT = process.env.PORT;
 const allowedOrigins = ['http://localhost:3000'];
 
 app.use(express.json());
-app.use(cors({ origin: allowedOrigins }));
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 app.use(rateLimiter);
 
 app.use('/api/memories', router);

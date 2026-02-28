@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: var(--font-poppins);
+  --font-roboto: var(--font-roboto);
+  --font-serif: "Georgia", "serif";
+  --font-cursive: "Dancing Script", "cursive";
+
+  --color-primary: #d97757;
+  --color-secondary: #fdfaf5;
+  --color-accent: #8c5d4b;
+  --color-claude: #d97757;
+  --color-text: #3e3633;
+  --color-card: #f9f4ec;
+  --color-border: #e6dace;
+  
+  --breakpoint-xs: 480px;
+}
+
+:root {
+  --primary: #d97757;
+  --secondary: #fdfaf5;
+  --tertiary: #3e3633;
+  --accent: #8c5d4b;
+  --card: #f9f4ec;
+  --border: #e6dace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), serif;
+}
+
+body {
+  background-color: var(--secondary);
+  color: var(--tertiary);
+  font-family: var(--font-roboto), sans-serif;
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(0,0,0,0.03) 1px, transparent 0),
+    url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  background-size: 40px 40px, auto;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.05) 100%);
+  z-index: 100;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-(--primary) hover:bg-[#c1614a] text-(--secondary) font-serif font-medium py-2 px-6 rounded-sm border border-(--primary) shadow-[4px_4px_0px_0px_rgba(217,119,87,0.3)] transition-all duration-200 active:translate-x-1 active:translate-y-1 active:shadow-none;
+  }
+  
+  .btn-accent {
+    @apply bg-(--accent) hover:bg-[#724a3c] text-(--secondary) font-serif font-medium py-2 px-6 rounded-sm border border-(--accent) shadow-[4px_4px_0px_0px_rgba(140,93,75,0.3)] transition-all duration-200 active:translate-x-1 active:translate-y-1 active:shadow-none;
+  }
+
+  .input-field {
+    @apply
+    bg-white/80
+    border-b-2 border-t-0 border-x-0 border-(--border)
+    text-(--tertiary)
+    font-medium
+    py-3 px-4
+    rounded-t-sm
+    transition-all duration-200 ease-in-out
+    focus:outline-none
+    focus:border-(--primary)
+    focus:bg-white
+    placeholder:italic
+    placeholder:text-gray-400
+  }
+
+  .paper-card {
+    @apply bg-(--card) border border-(--border) shadow-md rounded-sm p-5 sm:p-6 relative overflow-hidden transition-all duration-300;
+    background-image: url("https://www.transparenttextures.com/patterns/beige-paper.png");
+  }
+  
+  .paper-card::before {
+    content: "";
+    @apply absolute top-0 left-0 w-full h-1 bg-(--primary)/20;
+  }
+
+  .sepia-filter {
+    filter: sepia(0.3) contrast(1.1) brightness(0.95);
+  }
+
+  .grainy-overlay {
+    @apply pointer-events-none fixed inset-0 z-50 opacity-[0.03];
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+  }
+
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
