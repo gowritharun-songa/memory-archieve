@@ -20,7 +20,7 @@ cloudinary.config({
 const app = express();
 const PORT = process.env.PORT;
 
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['https://memory-archieve.vercel.app/'];
 
 app.use(express.json());
 app.use(cors({
