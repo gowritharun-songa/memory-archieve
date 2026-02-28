@@ -16,6 +16,10 @@ const memorySchema = mongoose.Schema({
         type: String,
         required: true,
         maxlength: 32
+    },
+    image: {
+        type: String,
+        default: ''
     }
 }, { timestamps: true });
 

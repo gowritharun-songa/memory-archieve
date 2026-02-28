@@ -1,5 +1,6 @@
 
 import Memory from "../models/Memory.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const getAllMemos = async (req, res) => {
    try {
@@ -14,41 +15,94 @@ export const getAllMemos = async (req, res) => {
 };
 
 export const postMemo = async (req, res) => {
-    try {
-      const {title, content, creator} = req.body;
-      const newMemo = new Memory({title, content, creator});
-      const savedMemo = await newMemo.save();
-      res.status(201).json({
-         savedMemo
+  try {
+    const {title, content, creator} = req.body;
+    
+    if(!title || !content || !creator){
+      return res.status(400).json({
+        message: "Missing required fields",
       });
-    } catch (error) {
-        console.error("Error in postMemo", error);
-        res.status(500).json({
-            message: "Internal server error"
-        })
     }
+    
+    let image = '';
+    if(req.file) {
+      const result = await new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "Memories",
+            resource_type: 'image',
+            timeout: 120000
+          },
+          (error, result) => {
+            if(error) return reject(error);
+            else resolve(result);
+          }
+        );
+        stream.end(req.file.buffer);
+      });
+      image = result.secure_url;
+    }
+    
+    const newMemo = await Memory.create({
+      title,
+      content,
+      creator,
+      image: image || undefined
+    });
+    const savedMemo = await newMemo.save();
+    res.status(201).json({
+      sucess: true,
+      message: "Memory Saved successfully",
+      savedMemo
+    });
+  } catch (error) {
+    console.error("Error in postMemo", error);
+    res.status(500).json({
+      message: "Internal server error"
+    })
+  }
 }
 
 export const updateMemo = async (req, res) => {
-    const { id } = req.params;
-    const { title, description, creator } = req.body;
-
-    try {
-        const updatedMemory = await Memory.findByIdAndUpdate(
-            id,
-            { title, description, creator },
-            { new: true }
+  const { id } = req.params;
+  const { title, content, creator } = req.body;
+  
+  try {
+    let updateData = { title, content, creator };
+    
+    if(req.file) {
+      const result = await new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "Memories",
+            resource_type: 'image',
+            timeout: 120000
+          },
+          (error, result) => {
+            if(error) return reject(error);
+            else resolve(result);
+          }
         );
-
-        if (!updatedMemory) {
-            return res.status(404).json({ message: "Memory not found" });
-        }
-
-        res.status(200).json(updatedMemory);
-    } catch (error) {
-        console.error("Error in updateMemo", error);
-        res.status(500).json({ message: "Internal server error" });
+        stream.end(req.file.buffer);
+      });
+      updateData.image = result.secure_url;
     }
+    
+    const updatedMemory = await Memory.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    );
+    
+    if (!updatedMemory) {
+      return res.status(404).json({ message: "Memory not found" });
+    }
+    
+    res.status(200).json(updatedMemory);
+  } catch (error) {
+    console.error("Error in updateMemo", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export const deleteMemo = async (req, res) => {
@@ -82,4 +136,4 @@ export const getById = async (req, res) => {
             message: "Internal server error"
         })
     }
-}
+};
