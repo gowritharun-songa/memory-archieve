@@ -1,5 +1,11 @@
+import { Metadata } from "next";
 import "./globals.css";
 import { Poppins, Roboto, Dancing_Script } from "next/font/google";
+
+export const metadata: Metadata = {
+  title: "Memory Archive | Your Digital Scrapbook",
+  description: "A simple and clean memory archive to store your precious moments, photos, and stories.",
+};
 
 const poppins = Poppins({
   subsets: ["latin"],

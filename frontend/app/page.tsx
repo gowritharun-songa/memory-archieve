@@ -69,7 +69,7 @@ export default function Home() {
               <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em]">The Digital Repository</span>
             </div>
             <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-(--tertiary) leading-none">
-              Memories <span className="text-(--primary) italic font-serif">&</span> Fragments
+              Memory <span className="text-(--primary) italic font-serif">Archive</span>
             </h1>
             <p className="text-(--tertiary)/70 font-serif italic text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed">
               A curated collection of moments, thoughts, and fragments of time, meticulously preserved for the generations yet to come.
