@@ -39,6 +39,6 @@ app.use('/api/memories', router);
 
 connectDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`Server waiting at http://localhost:${PORT}`);
+        console.log(`Server started at http://localhost:${PORT}`);
     })
 });
