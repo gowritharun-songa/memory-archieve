@@ -1,6 +1,6 @@
-# Memory Hub
+# Memory Archieve
 
-Memory Hub is a full-stack application for storing and sharing personal memories. It features a modern React-based frontend built with Next.js and a robust Node.js backend using Express and MongoDB.
+Memory Archieve is a full-stack application for storing and sharing personal memories. It features a modern React-based frontend built with Next.js and a robust Node.js backend using Express and MongoDB.
 
 ## 🚀 Features
 
